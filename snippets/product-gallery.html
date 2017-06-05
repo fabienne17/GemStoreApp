@@ -1,0 +1,13 @@
+<div class="text-center">
+	<div class="row">
+		<img ng-src="{{ product.images[0].full }} "/>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-xs-4" ng-repeat="image in product.images">
+			<img src="{{ image.full }}"  width="50" height="50" />
+		</div>
+	</div>
+</div>
+<br>
+

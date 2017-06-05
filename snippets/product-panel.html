@@ -1,0 +1,74 @@
+<section>
+	<!-- Product Nav Pills -->
+	<ul class="nav nav-pills">
+		<li ng-class="{ active: panel.isSelected(1)}">
+			<a href ng-click="panel.selectTab(1)">Description</a>
+		</li>
+		<li ng-class="{ active: panel.isSelected(2)}">
+			<a href ng-click="panel.selectTab(2)">Specifications</a>
+		</li>
+		<li ng-class="{ active: panel.isSelected(3)}">
+			<a href ng-click="panel.selectTab(3)">Reviews</a>
+		</li>
+	</ul>
+
+	<!-- Product Description section -->
+	<div class="panel" ng-show="panel.isSelected(1)">
+		<blockquote>{{product.description}}</blockquote>
+	</div>
+
+	<!-- Product Specification section -->
+	<div class="panel" ng-show="panel.isSelected(2)">
+		<blockquote>{{product.specification}}</blockquote>
+	</div>
+
+	<!-- Product Review Section -->
+	<div class="panel" ng-show="panel.isSelected(3)">
+		<!-- display reviews -->
+		<blockquote ng-repeat="review in product.reviews">
+			<b>{{ review.stars }} stars: </b>
+			{{ review.body }}
+			<cite> ~{{ review.author }}</cite>
+		</blockquote>
+
+		<!-- write a new review -->
+		<form name="reviewForm" 
+			  ng-controller="ReviewController as reviewCtrl"
+			  ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)"
+			  novalidate>
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						Submit a Review
+					</div>
+					<div class="panel-body">
+						<!-- live preview  -->
+						<blockquote>
+							<b>star(s): {{ reviewCtrl.review.stars }} </b>
+							<br>review: {{ reviewCtrl.review.body }}
+							<br>author: {{ reviewCtrl.review.author }}
+						</blockquote>
+					<div class="form-group">
+						<select ng-model="reviewCtrl.review.stars" class="form-control" id="stars" required>
+							<option value="1">1 star</option>
+							<option value="2">2 stars</option>
+							<option value="3">3 stars</option>
+							<option value="4">4 stars</option>
+							<option value="5">5 stars</option>
+						</select>
+					</div>
+	 
+					<div class="form-group">
+						<textarea ng-model="reviewCtrl.review.body" class="form-control" id="review-body" rows="3" placeholder="Write a short review of the product..." required></textarea>
+					</div>
+					<div class="form-group">
+						<input ng-model="reviewCtrl.review.author" type="email" class="form-control" id="author-email" placeholder="email" required>
+					</div>
+				
+					<button ng-show='reviewForm.$valid' type="submit" class="btn btn-primary pull-right">Submit Review</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+<br>
+<button ng-show="product.canPurchase" class="btn btn-primary">Add to cart</button>

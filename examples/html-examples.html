@@ -1,0 +1,15 @@
+<!-- ng-src -->
+<img ng-src="{{ product.images[0].full }}"/>
+
+<!-- ng-include -->
+<h3 ng-include="'snippets/product-title.html'"></h3>
+
+<!--CUSTOM DIRECTIVES: camelCase directive name changes to camel-case directive expressive HTML -->
+<!--Element -->
+<product-title></product-title> 
+
+<!-- Element -->
+<product-title/>
+
+<!-- Attribute -->
+<h3 product-title></h3>
